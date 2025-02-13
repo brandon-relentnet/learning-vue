@@ -10,12 +10,13 @@ import Counter from '@/components/Counter.vue';
             Vue concept or feature.
         </p>
 
-        <div>
-            <h2 class="text-2xl font-bold text-zinc-50 mb-3">Counter App</h2>
-            <p class="text-md text-zinc-200 mb-6">
-                A simple counter app that demonstrates the basics of Vue reactivity and component interaction.
-            </p>
-            <Counter />
+        <div class="space-y-4">
+            <RouterLink to="/projects/counter"
+                class="bg-zinc-800 p-4 rounded shadow-md text-zinc-50 hover:bg-zinc-700 transition-colors duration-300 flex justify-between items-center">
+                <h2 class="text-xl font-bold">Counter App</h2>
+                <span class="text-blue-400">→</span>
+            </RouterLink>
+
         </div>
     </div>
 </template>
