@@ -10,24 +10,24 @@ const reset = () => count.value = 0;
 </script>
 
 <template>
-    <div class="bg-zinc-800 p-4 rounded shadow-md text-center inline-block">
-        <div class="flex justify-center mb-3 space-x-2 text-zinc-50 text-2xl">
+    <div class="border border-text p-8 rounded shadow-md text-center inline-block">
+        <div class="flex justify-center mb-3 space-x-2 text-text text-2xl">
             <h2>Count:</h2>
             <transition name="slide" mode="out-in">
                 <h2 :key="count" class="font-bold">{{ count }}</h2>
             </transition>
         </div>
         <div class="flex space-x-4">
-            <CounterButtons label="Decrement" :onClick="decrement" bgColor="bg-red-400" />
-            <CounterButtons label="Reset" :onClick="reset" bgColor="bg-yellow-400" />
-            <CounterButtons label="Increment" :onClick="increment" bgColor="bg-green-400" />
+            <CounterButtons label="Decrement" :onClick="decrement" />
+            <CounterButtons label="Reset" :onClick="reset" />
+            <CounterButtons label="Increment" :onClick="increment" />
         </div>
     </div>
 </template>
 
 <style scoped>
 .slide-enter-active, .slide-leave-active {
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.1s ease, opacity 0.1s ease;
 }
 
 .slide-enter-from {

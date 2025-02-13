@@ -6,7 +6,7 @@ const transitionState = inject('transitionState');
 </script>
 
 <template>
-  <div class="h-screen bg-zinc-900">
+  <div class="h-screen bg-base">
     <Navbar />
     <router-view v-slot="{ Component }">
       <transition :name="transitionState.transitionName" mode="out-in">
@@ -19,7 +19,7 @@ const transitionState = inject('transitionState');
 <style scoped>
 /* Left Slide (Going Deeper) */
 .slide-left-enter-active {
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .slide-left-enter-from {
@@ -28,7 +28,7 @@ const transitionState = inject('transitionState');
 }
 
 .slide-left-leave-active {
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .slide-left-leave-to {
@@ -38,7 +38,7 @@ const transitionState = inject('transitionState');
 
 /* Right Slide (Going Back) */
 .slide-right-enter-active {
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .slide-right-enter-from {
@@ -47,7 +47,7 @@ const transitionState = inject('transitionState');
 }
 
 .slide-right-leave-active {
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .slide-right-leave-to {
@@ -58,7 +58,7 @@ const transitionState = inject('transitionState');
 /* Fade Transition */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 
 .fade-enter-from,

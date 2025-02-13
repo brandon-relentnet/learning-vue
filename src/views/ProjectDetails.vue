@@ -30,17 +30,19 @@ const project = computed(() => projectData[projectId.value] || {
 </script>
 
 <template>
-    <div class="container mx-auto pt-28 flex flex-col items-center">
-        <h1 class="text-4xl font-bold text-zinc-50 mb-3 text-center">{{ project.title }}</h1>
-        <p class="text-lg text-zinc-200 mb-6 text-center">
-            {{ project.description }}
-        </p>
-        <div class="mb-6">
+    <div class="container mx-auto pt-36 flex flex-col items-center text-text">
+        <div class="mb-10 text-center">
+            <h1 class="text-4xl font-bold mb-3">{{ project.title }}</h1>
+            <p class="text-lg">
+                {{ project.description }}
+            </p>
+        </div>
+        <div class="mb-10">
             <component :is="project.component" v-if="project.component" />
         </div>
 
 
-        <RouterLink to="/projects" class="text-blue-400 hover:text-blue-600 transition-colors duration-300">
+        <RouterLink to="/projects" class="text-subtle hover:text-text transition-colors duration-300">
             ← Back to Projects
         </RouterLink>
     </div>
