@@ -1,22 +1,33 @@
 <script setup>
-import Counter from '@/components/projects/counter/Counter.vue';
+import { defineProps, computed } from "vue";
+
+const props = defineProps({
+    projectData: Object,
+});
+
+const projects = computed(() => Object.values(props.projectData));
 </script>
 
 <template>
-    <div class="container mx-auto pt-36 text-text">
-        <h1 class="text-4xl font-bold mb-3 text-center">Projects</h1>
-        <p class="text-lg mb-6 text-center">
-            Here are some of the projects I have been working on. Each project is a simple demonstration of a specific
-            Vue concept or feature.
-        </p>
-
-        <div class="space-y-4">
-            <RouterLink to="/projects/counter"
-                class="bg-surface group p-4 rounded shadow-md hover:bg-overlay transition-colors duration-300 flex justify-between items-center">
-                <h2 class="text-xl font-semibold">Counter App</h2>
+    <div class="container mx-auto px-6 pt-36 text-text">
+        <div class="mb-10 w-1/2">
+            <h1 class="text-3xl font-bold mb-3">Projects</h1>
+            <p class="text-lg text-subtle italic font-serif">
+                Here are some of the projects I have been working on. Each project is a simple demonstration of a
+                specific Vue concept or feature.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <RouterLink v-for="project in projects" :key="project.id" :to="`/projects/${project.id}`"
+                class="bg-surface group p-6 rounded-xl shadow-xs hover:bg-overlay transition-colors duration-300 flex justify-between items-start space-x-4">
+                <div class="flex flex-col space-y-2">
+                    <h2 class="text-lg font-semibold">{{ project.title }}</h2>
+                    <p class="text-subtle italic font-serif">
+                        {{ project.description }}
+                    </p>
+                </div>
                 <span class="group-hover:text-gold text-3xl transition-colors duration-300">→</span>
             </RouterLink>
-
         </div>
     </div>
 </template>

@@ -1,48 +1,24 @@
 <script setup>
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
-import Counter from '@/components/projects/counter/Counter.vue';
+import { defineProps } from "vue";
 
-const route = useRoute();
-const projectId = computed(() => route.params.id);
-
-const projectData = {
-    counter: {
-        title: 'Counter',
-        description: 'A simple counter that demonstrates the basics of Vue reactivity and component interaction.',
-        component: Counter,
-    },
-    todo: {
-        title: 'Todo',
-        description: 'A todo app that demonstrates the basics of Vue reactivity and component interaction.',
-    },
-    calculator: {
-        title: 'Calculator',
-        description: 'A calculator that demonstrates the basics of Vue reactivity and component interaction.',
-    },
-};
-
-const project = computed(() => projectData[projectId.value] || {
-    title: 'Project not found',
-    description: 'This project does not exist.',
-    component: null,
+const props = defineProps({
+    project: Object,
 });
 </script>
 
 <template>
-    <div class="container mx-auto pt-36 flex flex-col items-center text-text">
-        <div class="mb-10 text-center">
-            <h1 class="text-4xl font-bold mb-3">{{ project.title }}</h1>
-            <p class="text-lg">
-                {{ project.description }}
+    <div class="container mx-auto pt-36 text-text">
+        <div class="mb-10 w-1/2">
+            <h1 class="text-3xl font-bold mb-3">{{ project?.title || "Project not found" }}</h1>
+            <p class="text-lg text-subtle italic font-serif">
+                {{ project?.description || "This project does not exist." }}
             </p>
         </div>
         <div class="mb-10">
-            <component :is="project.component" v-if="project.component" />
+            <component :is="project?.component" v-if="project?.component" />
         </div>
 
-
-        <RouterLink to="/projects" class="text-subtle hover:text-text transition-colors duration-300">
+        <RouterLink to="/projects" class="text-subtle active:text-gold hover:text-text transition-colors duration-300">
             ← Back to Projects
         </RouterLink>
     </div>

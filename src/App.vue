@@ -19,46 +19,46 @@ const transitionState = inject('transitionState');
 <style scoped>
 /* Left Slide (Going Deeper) */
 .slide-left-enter-active {
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .slide-left-enter-from {
-  transform: translateX(100%);
+  transform: translateX(50%);
   opacity: 0;
 }
 
 .slide-left-leave-active {
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .slide-left-leave-to {
-  transform: translateX(-100%);
+  transform: translateX(-50%);
   opacity: 0;
 }
 
 /* Right Slide (Going Back) */
 .slide-right-enter-active {
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .slide-right-enter-from {
-  transform: translateX(-100%);
+  transform: translateX(-50%);
   opacity: 0;
 }
 
 .slide-right-leave-active {
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .slide-right-leave-to {
-  transform: translateX(100%);
+  transform: translateX(50%);
   opacity: 0;
 }
 
 /* Fade Transition */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.2s ease;
+  transition: opacity 0.3s ease;
 }
 
 .fade-enter-from,
