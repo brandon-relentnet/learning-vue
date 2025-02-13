@@ -1,29 +1,68 @@
 <script setup>
-import Navbar from './components/Navbar.vue';
+import { inject } from "vue";
+import Navbar from "./components/Navbar.vue";
+
+const transitionState = inject('transitionState');
 </script>
 
 <template>
   <div class="h-screen bg-zinc-900">
     <Navbar />
-    <transition name="slide" mode="out-in">
-      <router-view :key="$route.fullPath"/>
-    </transition>
+    <router-view v-slot="{ Component }">
+      <transition :name="transitionState.transitionName" mode="out-in">
+        <component :is="Component" :key="$route.fullPath" />
+      </transition>
+    </router-view>
   </div>
 </template>
 
 <style scoped>
-.slide-enter-active,
-.slide-leave-active {
+/* Left Slide (Going Deeper) */
+.slide-left-enter-active {
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.slide-enter-from {
+.slide-left-enter-from {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.slide-left-leave-active {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.slide-left-leave-to {
   transform: translateX(-100%);
   opacity: 0;
 }
 
-.slide-leave-to {
+/* Right Slide (Going Back) */
+.slide-right-enter-active {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.slide-right-enter-from {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.slide-right-leave-active {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.slide-right-leave-to {
   transform: translateX(100%);
+  opacity: 0;
+}
+
+/* Fade Transition */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 </style>
