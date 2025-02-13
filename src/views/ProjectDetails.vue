@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
-import Counter from '@/components/Counter.vue';
+import Counter from '@/components/projects/counter/Counter.vue';
 
 const route = useRoute();
 const projectId = computed(() => route.params.id);

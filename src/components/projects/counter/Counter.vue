@@ -25,7 +25,7 @@ const reset = () => count.value = 0;
     </div>
 </template>
 
-<style>
+<style scoped>
 .slide-enter-active, .slide-leave-active {
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
