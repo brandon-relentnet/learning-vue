@@ -13,7 +13,7 @@ const reset = () => count.value = 0;
     <div class="bg-zinc-800 p-4 rounded shadow-md text-center">
         <div class="flex justify-center mb-3 space-x-2 text-zinc-50 text-2xl">
             <h2>Count:</h2>
-            <transition name="fade" mode="out-in">
+            <transition name="slide" mode="out-in">
                 <h2 :key="count" class="font-bold">{{ count }}</h2>
             </transition>
         </div>
@@ -26,13 +26,17 @@ const reset = () => count.value = 0;
 </template>
 
 <style>
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.3s ease;
+.slide-enter-active, .slide-leave-active {
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.fade-enter-from,
-.fade-leave-to {
+.slide-enter-from {
+    transform: translateY(-10px);
+    opacity: 0;
+}
+
+.slide-leave-to {
+    transform: translateY(10px);
     opacity: 0;
 }
 </style>
