@@ -10,7 +10,7 @@ const reset = () => count.value = 0;
 </script>
 
 <template>
-    <div class="bg-zinc-800 p-4 rounded shadow-md text-center">
+    <div class="bg-zinc-800 p-4 rounded shadow-md text-center inline-block">
         <div class="flex justify-center mb-3 space-x-2 text-zinc-50 text-2xl">
             <h2>Count:</h2>
             <transition name="slide" mode="out-in">

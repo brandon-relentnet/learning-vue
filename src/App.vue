@@ -1,10 +1,11 @@
 <script setup>
-import Counter from './components/Counter.vue';
+import Navbar from './components/Navbar.vue';
 </script>
 
 <template>
-  <div class="h-screen bg-zinc-900 flex flex-col items-center justify-center">
-    <Counter />
+  <div class="h-screen bg-zinc-900">
+    <Navbar />
+    <router-view />
   </div>
 </template>
 
