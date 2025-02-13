@@ -16,8 +16,8 @@ const projectData = reactive({
     },
     todo: {
         id: "todo",
-        title: "Todo",
-        description: "A todo app that demonstrates the basics of Vue reactivity and component interaction.",
+        title: "To-do",
+        description: "A to-do app that demonstrates the basics of Vue reactivity and component interaction.",
     },
     calculator: {
         id: "calculator",
