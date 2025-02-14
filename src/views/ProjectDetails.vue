@@ -1,4 +1,6 @@
 <script setup>
+import { ArrowTurnUpLeftIcon } from '@heroicons/vue/24/outline'
+
 const props = defineProps({
     project: Object,
 });
@@ -17,7 +19,8 @@ const props = defineProps({
         </div>
 
         <RouterLink to="/projects" class="text-subtle active:text-gold hover:text-text transition-colors duration-300">
-            ← Back to Projects
+            <ArrowTurnUpLeftIcon class="size-4 inline-block mb-1" />
+            Back to Projects
         </RouterLink>
     </div>
 </template>

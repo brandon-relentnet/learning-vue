@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from "vue";
+import { ArrowTurnUpRightIcon } from "@heroicons/vue/24/outline";
 
 const props = defineProps({
     projectData: Object,
@@ -19,14 +20,14 @@ const projects = computed(() => Object.values(props.projectData));
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <RouterLink v-for="project in projects" :key="project.id" :to="`/projects/${project.id}`"
-                class="bg-surface group p-6 rounded-xl shadow-xs hover:bg-overlay transition-colors duration-300 flex justify-between items-start space-x-4">
+                class="bg-surface group p-6 rounded-xl shadow-xs hover:bg-overlay transition-colors duration-200 flex justify-between items-start space-x-4">
                 <div class="flex flex-col space-y-2">
                     <h2 class="text-lg font-semibold">{{ project.title }}</h2>
                     <p class="text-subtle italic font-serif">
                         {{ project.description }}
                     </p>
                 </div>
-                <span class="group-hover:text-gold text-3xl transition-colors duration-300">→</span>
+                <ArrowTurnUpRightIcon class="size-16 group-hover:text-gold transition-colors duration-200" />
             </RouterLink>
         </div>
     </div>
