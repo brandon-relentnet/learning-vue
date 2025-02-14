@@ -37,20 +37,24 @@ function removeTodo(id) {
         <input v-model="newTodo" required placeholder="Add a new task" />
         <button>Add</button>
     </form>
-    <ul v-if="todos.length">
-        <li v-for="todo in filteredTodos" :key="todo.id">
-
-            <Transition name="fade-scale" mode="out-in">
-                <IncompletedIcon v-if="!todo.completed" @click="todo.completed = !todo.completed"
-                    class="size-6 text-rose cursor-pointer" key="incompleted" />
-                <CompletedIcon v-else @click="todo.completed = !todo.completed"
-                    class="size-6 text-rose cursor-pointer" key="completed" />
-            </Transition>
-            <span :class="{ completed: todo.completed }">{{ todo.text }}</span>
-            <button @click="removeTodo(todo.id)">Remove</button>
+    <ul v-if="todos.length" class="flex flex-col space-y-2">
+        <li v-for="todo in filteredTodos" :key="todo.id" @click="todo.completed = !todo.completed"
+            class="group cursor-pointer bg-surface hover:bg-overlay rounded-xl p-4 transition duration-200 flex justify-between items-center">
+            <div>
+                <Transition name="fade-scale" mode="out-in" class="inline-block mr-2">
+                    <IncompletedIcon v-if="!todo.completed" class="size-6 text-subtle cursor-pointer" key="incompleted" />
+                    <CompletedIcon v-else class="size-6 text-gold cursor-pointer" key="completed" />
+                </Transition>
+                <span :class="{ 'line-through text-subtle': todo.completed, 'cursor-pointer': true }"
+                    class="transition duration-200 font-semibold">
+                    {{ todo.text }}
+                </span>
+            </div>
+            <XMarkIcon @click="removeTodo(todo.id)" class="inline-block size-6 text-subtle hover:text-gold cursor-pointer transition duration-200" />
         </li>
     </ul>
     <p v-else>Add more tasks!</p>
+
     <button @click="hideCompleted = !hideCompleted">
         {{ hideCompleted ? 'Show Completed' : 'Hide Completed' }}
     </button>
