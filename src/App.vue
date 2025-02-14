@@ -2,7 +2,7 @@
 import { inject } from "vue";
 import Navbar from "./components/Navbar.vue";
 
-const transitionState = inject('transitionState');
+const transitionState = inject("transitionState");
 </script>
 
 <template>
