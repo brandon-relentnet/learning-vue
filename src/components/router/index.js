@@ -2,6 +2,7 @@ import { reactive, markRaw } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 import Counter from '@/components/projects/counter/Counter.vue';
+import Todo from '@/components/projects/todo/Todo.vue';
 
 const HomePage = () => import('@/views/HomePage.vue');
 const ProjectsPage = () => import('@/views/ProjectsPage.vue');
@@ -19,6 +20,7 @@ const projectData = reactive({
         id: "todo",
         title: "To-do",
         description: "A to-do app that demonstrates the basics of Vue reactivity and component interaction.",
+        component: markRaw(Todo),
     },
     calculator: {
         id: "calculator",
