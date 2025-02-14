@@ -6,7 +6,7 @@ const transitionState = inject('transitionState');
 </script>
 
 <template>
-  <div class="h-screen bg-base">
+  <div class="container mx-auto px-6 pt-36 text-text max-w-[1080px]">
     <Navbar />
     <router-view v-slot="{ Component }">
       <transition :name="transitionState.transitionName" mode="out-in">

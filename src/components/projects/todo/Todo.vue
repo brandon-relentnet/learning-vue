@@ -2,15 +2,17 @@
 import { ref, computed } from 'vue'
 import { CheckCircleIcon as IncompletedIcon, XMarkIcon, EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline'
 import { CheckCircleIcon as CompletedIcon } from '@heroicons/vue/24/solid'
+import { useStorage } from '@vueuse/core'
 
-let id = 0;
+let id = useStorage('todo-id', 0);
 
 const newTodo = ref('');
 const hideCompleted = ref(false);
-const todos = ref([
-    { id: id++, text: 'Task 1', completed: false },
-    { id: id++, text: 'Task 2', completed: true },
-    { id: id++, text: 'Task 3', completed: false },
+const todos = useStorage('todos',
+[
+    { id: id.value++, text: 'Task 1', completed: false },
+    { id: id.value++, text: 'Task 2', completed: true },
+    { id: id.value++, text: 'Task 3', completed: false },
 ]);
 
 const filteredTodos = computed(() => {
@@ -20,8 +22,9 @@ const filteredTodos = computed(() => {
 })
 
 function addTodo() {
+    if (!todos.value.length) id.value = 0;
     todos.value.push({
-        id: id++,
+        id: id.value++,
         text: newTodo.value,
         completed: false,
     });

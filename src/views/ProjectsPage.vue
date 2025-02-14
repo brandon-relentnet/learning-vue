@@ -9,7 +9,7 @@ const projects = computed(() => Object.values(props.projectData));
 </script>
 
 <template>
-    <div class="container mx-auto px-6 pt-36 text-text max-w-[1080px]">
+    <div>
         <div class="mb-10 w-1/2">
             <h1 class="text-3xl font-bold mb-3">Projects</h1>
             <p class="text-lg text-subtle italic font-serif">

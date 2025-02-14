@@ -5,7 +5,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <div class="container mx-auto pt-36 px-6 text-text max-w-[1080px]">
+    <div>
         <div class="mb-10 w-1/2">
             <h1 class="text-3xl font-bold mb-3">{{ project?.title || "Project not found" }}</h1>
             <p class="text-lg text-subtle italic font-serif">

@@ -17,3 +17,7 @@
     --color-highlight-med: #403d52;
     --color-highlight-high: #524f67;
 }
+
+html {
+    background-color: var(--color-base);
+}
