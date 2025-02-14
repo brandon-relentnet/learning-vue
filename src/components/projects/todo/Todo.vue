@@ -1,13 +1,14 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { CheckCircleIcon as IncompletedIcon, XMarkIcon, EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline'
-import { CheckCircleIcon as CompletedIcon } from '@heroicons/vue/24/solid'
+import { CheckCircleIcon as IncompletedIcon, XMarkIcon, EyeIcon, EyeSlashIcon, BackspaceIcon } from '@heroicons/vue/24/outline'
+import { CheckCircleIcon as CompletedIcon, PlusIcon } from '@heroicons/vue/24/solid'
 import { useStorage } from '@vueuse/core'
 
 let id = useStorage('todo-id', 0);
 
 const newTodo = ref('');
 const hideCompleted = ref(false);
+const taskTitleInput = ref(null);
 const todos = useStorage('todos',
 [
     { id: id.value++, text: 'Task 1', completed: false },
@@ -33,12 +34,28 @@ function addTodo() {
 function removeTodo(id) {
     todos.value = todos.value.filter((todo) => todo.id !== id);
 }
+
+const showConfirmModal = ref(false);
+
+function clearAllTodos() {
+    showConfirmModal.value = true; 
+}
+
+function confirmClearAll() {
+    todos.value = [];
+    id.value = 0;
+    showConfirmModal.value = false;
+}
+
+function cancelClearAll() {
+    showConfirmModal.value = false;
+}
 </script>
 
 <template>
     <div class="flex justify-between items-center mb-6">
         <form @submit.prevent="addTodo">
-            <input v-model="newTodo" required placeholder="Add a new task"
+            <input v-model="newTodo" ref="taskTitleInput" required placeholder="Add a new task"
                 class="border-b placeholder:italic border-subtle hover:bg-surface rounded-t-xl outline-none focus:bg-surface focus:border-gold transition duration-200 px-4 py-2 mr-2" />
             <button
                 class="hover:bg-surface rounded-xl px-4 py-2 transition duration-200 text-subtle hover:text-text font-semibold">Add</button>
@@ -46,8 +63,8 @@ function removeTodo(id) {
         <button @click="hideCompleted = !hideCompleted"
             class="hover:bg-surface rounded-xl px-4 py-2 cursor-pointer transition duration-200 flex items-center space-x-2 text-subtle hover:text-text font-semibold">
             <Transition name="fade-scale" mode="out-in" class="inline-block mr-2">
-                <EyeIcon v-if="!hideCompleted" class="size-6 mt-1" />
-                <EyeSlashIcon v-else class="size-6 mt-1" />
+                <EyeIcon v-if="!hideCompleted" class="size-6 mt-0.5" />
+                <EyeSlashIcon v-else class="size-6 mt-0.5" />
             </Transition>
             {{ hideCompleted ? 'Show' : 'Hide' }}
             Completed
@@ -71,7 +88,35 @@ function removeTodo(id) {
                 class="inline-block size-6 text-subtle hover:text-gold cursor-pointer transition duration-200" />
         </li>
     </ul>
-    <p v-else>Add more tasks!</p>
+    <div v-else @click="taskTitleInput.focus()"
+        class="cursor-pointer bg-surface hover:bg-overlay rounded-xl p-4 transition duration-200 flex justify-start items-center">
+        <PlusIcon class="size-6 mt-0.5 mr-2" />
+        <p>Add more tasks!</p>
+    </div>
+    <button @click="clearAllTodos"
+        class="mt-4 hover:bg-surface rounded-xl px-4 py-2 cursor-pointer transition duration-200 flex items-center space-x-2 text-subtle hover:text-text font-semibold">
+        <BackspaceIcon class="size-6 mt-0.5" />
+        <span>Clear All</span>
+    </button>
+    <Transition name="popup" mode="in">
+        <Teleport to="body">
+            <div v-if="showConfirmModal" class="fixed inset-0 flex items-center justify-center backdrop-blur-xs z-10">
+                <div class="bg-surface rounded-xl shadow-lg p-6 text-center text-text">
+                    <p class="text-lg font-semibold mb-4">Are you sure you want to clear all tasks?</p>
+                    <div class="flex justify-center space-x-4 text-subtle">
+                        <button @click="confirmClearAll"
+                            class="px-4 py-2 bg-overlay hover:bg-gold hover:text-base font-semibold transition duration-200 rounded-xl active:scale-90">
+                            Yes, Clear All
+                        </button>
+                        <button @click="cancelClearAll"
+                            class="px-4 py-2 bg-overlay hover:bg-muted hover:text-text font-semibold rounded-xl transition duration-200 active:scale-90">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </Teleport>
+    </Transition>
 </template>
 
 <style scoped>
@@ -89,6 +134,23 @@ function removeTodo(id) {
 .fade-scale-enter-to,
 .fade-scale-leave-from {
     transform: scale(1);
+    opacity: 1;
+}
+
+.popup-enter-active,
+.popup-leave-active {
+    transition: all 0.2s ease;
+}
+
+.popup-enter-from,
+.popup-leave-to {
+    transform: translateY(20px);
+    opacity: 0;
+}
+
+.popup-enter-to,
+.popup-leave-from {
+    transform: translateY(0);
     opacity: 1;
 }
 </style>
