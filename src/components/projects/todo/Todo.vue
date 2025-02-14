@@ -74,9 +74,9 @@ function cancelClearAll() {
             Completed
         </button>
     </div>
-    <Transition name="add-more" mode="out-in">
+    <Transition name="fade-scale" mode="out-in">
         <ul v-if="todos.length" class="flex flex-col space-y-2">
-            <transition-group name="task-animation">
+            <transition-group name="slide-up">
                 <li v-for="todo in filteredTodos" :key="todo.id" @click="todo.completed = !todo.completed"
                     class="group cursor-pointer bg-surface hover:bg-overlay rounded-xl p-4 transition duration-200 flex justify-between items-center">
                     <div class="flex items-center space-x-4 mr-2">
@@ -112,7 +112,7 @@ function cancelClearAll() {
         <BackspaceIcon class="size-6 mt-0.5" />
         <span>Clear All</span>
     </button>
-    <Transition name="popup">
+    <Transition name="slide-up">
         <Teleport to="body">
             <div v-if="showConfirmModal" class="fixed inset-0 flex items-center justify-center backdrop-blur-xs z-10">
                 <div class="bg-surface rounded-xl shadow-lg p-6 text-center text-text">
@@ -136,43 +136,31 @@ function cancelClearAll() {
 <style scoped>
 .fade-scale-enter-active,
 .fade-scale-leave-active,
-.popup-enter-active,
-.popup-leave-active,
-.add-more-enter-active,
-.add-more-leave-active,
-.task-animation-enter-active,
-.task-animation-leave-active {
+.slide-up-enter-active,
+.slide-up-leave-active {
     transition: all 0.2s ease-in-out;
 }
 
 .fade-scale-enter-from,
-.fade-scale-leave-to,
-.add-more-enter-from,
-.add-more-leave-to {
+.fade-scale-leave-to {
     transform: scale(0);
     opacity: 0;
 }
 
 .fade-scale-enter-to,
-.fade-scale-leave-from,
-.add-more-enter-to,
-.add-more-leave-from {
+.fade-scale-leave-from {
     transform: scale(1);
     opacity: 1;
 }
 
-.popup-enter-from,
-.popup-leave-to,
-.task-animation-enter-from,
-.task-animation-leave-to {
+.slide-up-enter-from,
+.slide-up-leave-to {
     transform: translateY(20px);
     opacity: 0;
 }
 
-.popup-enter-to,
-.popup-leave-from,
-.task-animation-enter-to,
-.task-animation-leave-from {
+.slide-up-enter-to,
+.slide-up-leave-from {
     transform: translateY(0);
     opacity: 1;
 }
